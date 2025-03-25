@@ -1,25 +1,26 @@
 import { MouseEvent, useState } from "react"
-import { ENDPOINTS } from "../constants"
-import { LoginApiResponse } from "../types"
+import { ENDPOINTS, ROUTES } from "../constants"
 import { useRouter } from "next/navigation"
 
-export const useLogin = () => {
+
+export const useRegister = () => {
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
     const router = useRouter()
 
-    const handleLogin = async (e: MouseEvent) => {
+    const handleRegister = async (e: MouseEvent) => {
         e.preventDefault()
-        const body = JSON.stringify({ email, password })
+        const body = JSON.stringify({ name, email, password })
 
-        const url = ENDPOINTS.login
+        const url = ENDPOINTS.register
 
         try {
             const response = await fetch(url, {
                 method: 'POST',
                 body,
-                headers : {
+                headers: {
                     "Content-Type": "application/json",
                 }
             });
@@ -28,9 +29,9 @@ export const useLogin = () => {
                 throw new Error(`Response status: ${response.status}`);
             }
 
-            const data: LoginApiResponse = await response.json()
-            localStorage.setItem("user", JSON.stringify(data.user))
-            router.push("/dashboard")
+            const data = await response.json();
+
+            router.push(ROUTES.login)
         } catch (error) {
             setError(true)
         }
@@ -40,11 +41,13 @@ export const useLogin = () => {
 
 
     return {
+        name,
+        setName,
         email,
         setEmail,
         password,
         setPassword,
         error,
-        handleLogin
+        handleRegister
     }
 }

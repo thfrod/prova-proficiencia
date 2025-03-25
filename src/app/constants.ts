@@ -6,3 +6,9 @@ export const ENDPOINTS = {
     dashboard: `${API_BASE_URL}/dashboard`,
     sales: `${API_BASE_URL}/dashboard/sales`
 }
+
+export const ROUTES = {
+    login: '/entrar',
+    register: '/cadastro',
+    dashboard: '/dashboard'
+}
