@@ -1,4 +1,14 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { ROUTES } from "./constants";
 
 export default function Home() {
-  return (<h1>Hello World</h1>)
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push(ROUTES.login);
+  }, []);
+
+  return null;
 }
