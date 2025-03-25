@@ -2,7 +2,7 @@
 import { useLogin } from "../hooks/useLogin"
 
 const Login = () => {
-    const {email, setEmail, password, setPassword, handleLogin} = useLogin()
+    const {setEmail, setPassword, handleLogin} = useLogin()
 
     return (
         <div className="flex flex-col gap-4 items-center justify-center h-full">
